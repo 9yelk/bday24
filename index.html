@@ -14,6 +14,43 @@
       overflow-x: hidden;
     }
 
+    /* --- LOADING BOW SCREEN --- */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    #loading-screen img {
+      width: 300px;
+      animation: bowBounce 1s infinite;
+    }
+    @keyframes bowBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .bow-left, .bow-right {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: pink;
+      z-index: 10000;
+    }
+    .bow-left { left: 0; }
+    .bow-right { right: 0; }
+    .bow-left.animate { animation: slideLeft 2s forwards; }
+    .bow-right.animate { animation: slideRight 2s forwards; }
+    @keyframes slideLeft { to { transform: translateX(-100%); } }
+    @keyframes slideRight { to { transform: translateX(100%); } }
+
     /* Floating hearts & sparkles */
     .heart, .sparkle {
       position: fixed;
@@ -43,17 +80,18 @@
       box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
     }
 
-    /* Letter */
+    /* Letter card */
     .letter {
       max-width: 900px;
       margin: 50px auto;
-      padding: 30px;
-      background: rgba(255, 182, 193, 0.15);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+      padding: 40px 30px;
+      background: rgba(255, 182, 193, 0.85); /* soft pink */
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
       font-size: 1.2rem;
       line-height: 1.8;
-      white-space: pre-line; /* keeps your line breaks */
+      color: #111; /* dark text for readability */
+      white-space: pre-line;
     }
 
     /* Cake */
@@ -63,33 +101,20 @@
       display: block;
       animation: bounce 2s infinite;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-
-    /* Music button */
-    .music-control {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,182,193,0.7);
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      cursor: pointer;
-      font-size: 24px;
-      color: white;
-      box-shadow: 0 0 10px rgba(255,182,193,0.8);
-    }
-    .music-control:hover {
-      background: rgba(255,182,193,1);
-    }
   </style>
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="bow-left"></div>
+    <div class="bow-right"></div>
+    <img src="bowiee.png" alt="Bow">
+  </div>
+
   <!-- Floating Hearts & Sparkles -->
   <script>
     function createFloatingElement(type) {
@@ -101,6 +126,20 @@
       setTimeout(() => el.remove(), 10000);
     }
     setInterval(() => createFloatingElement(Math.random() > 0.5 ? "heart" : "sparkle"), 500);
+
+    // Bow loading animation
+    window.addEventListener("load", () => {
+      const left = document.querySelector(".bow-left");
+      const right = document.querySelector(".bow-right");
+      const screen = document.getElementById("loading-screen");
+
+      left.classList.add("animate");
+      right.classList.add("animate");
+
+      setTimeout(() => {
+        screen.style.display = "none";
+      }, 2000); // matches animation duration
+    });
   </script>
 
   <!-- Top Banner -->
@@ -109,52 +148,41 @@
   </div>
 
   <!-- Middle Letter -->
-  <div class="letter">
+  <section class="letter">
     <h1>To my beloved baby, on her birthday ❤️</h1>
     <p>
-From your daddy  
-20/02/10  
-
-Happy birthday to my baby, WHOS NOW 15, the third birthday I get to be with you, along with your 12th and 14th.  
-You’ve grown so much right in front of my eyes, no longer that little girl (still are to me 😼 ), but still my baby nonetheless, with your evergrowing cuteness.  
-
-Our love has blossomed so beautifully, with us on our way to getting married, and you yourself have grown so much since we’ve met, and in a way, so little.  
-It’s hard to believe that I’ve known you for 4 years now, but reassuring as well, since we both know that we’ll always be together, taking care of each other like no one else could.  
-
-You’ll always be my baby, my good little girl no matter what digits your age reaches, because at the end of the day, Reyyan’s my cute baby, and I’m her baba.  
-You’ll always have me with you my love, I promise you.  
-
-I love you so much my girl, wallahhhh, and I always will.  
-You're myyy wife, my one and only precious one, and I thank Allah for you everyday, my barakah in human form, the best gift I could've ever received.  
-
-في الدنيا و الاخره ❤️
+      From your daddy <br>
+      20/02/10
     </p>
-  </div>
+    <p>
+      Happy birthday to my baby, WHOS NOW 15, the third birthday I get to be with you, along with your 12th and 14th.  
+      You’ve grown so much right in front of my eyes, no longer that little girl (still are to me 😼 ), but still my baby nonetheless, with your evergrowing cuteness.
+    </p>
+    <p>
+      Our love has blossomed so beautifully, with us on our way to getting married, and you yourself have grown so much since we’ve met, and in a way, so little.  
+      It’s hard to believe that I’ve known you for 4 years now, but reassuring as well, since we both know that we’ll always be together, taking care of each other like no one else could.
+    </p>
+    <p>
+      You’ll always be my baby, my good little girl no matter what digits your age reaches, because at the end of the day, Reyyan’s my cute baby, and I’m her baba.  
+      You’ll always have me with you my love, I promise you.
+    </p>
+    <p>
+      I love you so much my girl, wallahhhh, and I always will.  
+      You're myyy wife, my one and only precious one, and I thank Allah for you everyday. My barakah in human form, the best gift I could've ever received, alhamdulillah for you my love.
+    </p>
+    <p>
+      في الدنيا و الاخره ❤️
+    </p>
+  </section>
 
   <!-- Bottom Cake -->
   <div class="cake">
     <img src="pinkcake.png" alt="Birthday Cake">
   </div>
 
-  <!-- Background Music -->
-  <audio id="bg-music" src="bdayaudio.mp3" loop></audio>
-  <button class="music-control" id="music-btn">▶️</button>
-
-  <script>
-    const music = document.getElementById("bg-music");
-    const btn = document.getElementById("music-btn");
-    let isPlaying = false;
-
-    btn.addEventListener("click", () => {
-      if (isPlaying) {
-        music.pause();
-        btn.textContent = "▶️";
-      } else {
-        music.play();
-        btn.textContent = "⏸️";
-      }
-      isPlaying = !isPlaying;
-    });
-  </script>
+  <!-- Background Music autoplay -->
+  <audio autoplay loop>
+    <source src="bdayaudio.mp3" type="audio/mpeg">
+  </audio>
 </body>
 </html>
