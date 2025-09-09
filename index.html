@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Love</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', cursive, sans-serif;
+      text-align: center;
+      color: #fff;
+      background: #111;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts & sparkles */
+    .heart, .sparkle {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      opacity: 0.8;
+      animation: floatUp 8s linear infinite;
+    }
+    .heart {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Filled_heart.svg/1024px-Filled_heart.svg.png') no-repeat center/contain;
+    }
+    .sparkle {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Star_icon-72a7cf.svg/1024px-Star_icon-72a7cf.svg.png') no-repeat center/contain;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* Banner */
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Letter */
+    .letter {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(255, 182, 193, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+      font-size: 1.2rem;
+      line-height: 1.8;
+      white-space: pre-line; /* keeps your line breaks */
+    }
+
+    /* Cake */
+    .cake img {
+      width: 250px;
+      margin: 40px auto;
+      display: block;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Music button */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,182,193,0.7);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+      box-shadow: 0 0 10px rgba(255,182,193,0.8);
+    }
+    .music-control:hover {
+      background: rgba(255,182,193,1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Hearts & Sparkles -->
+  <script>
+    function createFloatingElement(type) {
+      const el = document.createElement("div");
+      el.className = type;
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = 6 + Math.random() * 4 + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 10000);
+    }
+    setInterval(() => createFloatingElement(Math.random() > 0.5 ? "heart" : "sparkle"), 500);
+  </script>
+
+  <!-- Top Banner -->
+  <div class="banner">
+    <img src="threemirs.png" alt="Our Photo">
+  </div>
+
+  <!-- Middle Letter -->
+  <div class="letter">
+    <h1>To my beloved baby, on her birthday ❤️</h1>
+    <p>
+From your daddy  
+20/02/10  
+
+Happy birthday to my baby, WHOS NOW 15, the third birthday I get to be with you, along with your 12th and 14th.  
+You’ve grown so much right in front of my eyes, no longer that little girl (still are to me 😼 ), but still my baby nonetheless, with your evergrowing cuteness.  
+
+Our love has blossomed so beautifully, with us on our way to getting married, and you yourself have grown so much since we’ve met, and in a way, so little.  
+It’s hard to believe that I’ve known you for 4 years now, but reassuring as well, since we both know that we’ll always be together, taking care of each other like no one else could.  
+
+You’ll always be my baby, my good little girl no matter what digits your age reaches, because at the end of the day, Reyyan’s my cute baby, and I’m her baba.  
+You’ll always have me with you my love, I promise you.  
+
+I love you so much my girl, wallahhhh, and I always will.  
+You're myyy wife, my one and only precious one, and I thank Allah for you everyday, my barakah in human form, the best gift I could've ever received.  
+
+في الدنيا و الاخره ❤️
+    </p>
+  </div>
+
+  <!-- Bottom Cake -->
+  <div class="cake">
+    <img src="pinkcake.png" alt="Birthday Cake">
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" src="bdayaudio.mp3" loop></audio>
+  <button class="music-control" id="music-btn">▶️</button>
+
+  <script>
+    const music = document.getElementById("bg-music");
+    const btn = document.getElementById("music-btn");
+    let isPlaying = false;
+
+    btn.addEventListener("click", () => {
+      if (isPlaying) {
+        music.pause();
+        btn.textContent = "▶️";
+      } else {
+        music.play();
+        btn.textContent = "⏸️";
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
