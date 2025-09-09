@@ -86,17 +86,17 @@
       margin: 50px auto;
       padding: 40px 30px;
       background: rgba(255, 182, 193, 0.85); /* soft pink */
-      border-radius: 25px;
-      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
+      border-radius: 25px; /* rounded corners */
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6); /* soft glow/shadow */
       font-size: 1.2rem;
       line-height: 1.8;
       color: #111; /* dark text for readability */
-      white-space: pre-line;
+      white-space: pre-line; /* preserves line breaks */
     }
 
     /* Cake */
     .cake img {
-      width: 250px;
+      width: 500px; /* doubled size */
       margin: 40px auto;
       display: block;
       animation: bounce 2s infinite;
@@ -127,7 +127,11 @@
     }
     setInterval(() => createFloatingElement(Math.random() > 0.5 ? "heart" : "sparkle"), 500);
 
-    // Bow loading animation
+    // Bow loading animation + autoplay music
+    const music = document.createElement("audio");
+    music.src = "bdayaudio.mp3";
+    music.loop = true;
+
     window.addEventListener("load", () => {
       const left = document.querySelector(".bow-left");
       const right = document.querySelector(".bow-right");
@@ -138,8 +142,18 @@
 
       setTimeout(() => {
         screen.style.display = "none";
-      }, 2000); // matches animation duration
+
+        // Try to play music
+        music.play().catch(() => {
+          console.log("Autoplay blocked, will play on first click.");
+        });
+      }, 2000); // matches bow animation
     });
+
+    // Fallback: play music on first click if blocked
+    document.addEventListener("click", () => {
+      if (music.paused) music.play();
+    }, { once: true });
   </script>
 
   <!-- Top Banner -->
@@ -151,7 +165,7 @@
   <section class="letter">
     <h1>To my beloved baby, on her birthday ❤️</h1>
     <p>
-      From your daddy <br>
+      From your daddy, <br>
       20/02/10
     </p>
     <p>
@@ -179,10 +193,5 @@
   <div class="cake">
     <img src="pinkcake.png" alt="Birthday Cake">
   </div>
-
-  <!-- Background Music autoplay -->
-  <audio autoplay loop>
-    <source src="bdayaudio.mp3" type="audio/mpeg">
-  </audio>
 </body>
 </html>
